@@ -53,8 +53,22 @@
               <a href="home.html">Home</a>
             </li>
             <li>
-              <i class="fas fa-search"></i>
-              <a href="#">Search</a>
+              <i class="fas fa-search"
+                ><input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  id="search"
+              /></i>
+
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+                onclick="searchBtn()"
+              >
+                Search
+              </button>
             </li>
             <li>
               <ion-icon name="library-outline"></ion-icon>
@@ -441,7 +455,7 @@
     <!-- IONICONS LIBRARY-->
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
     <script src="library.js"></script>
   </body>
 </html>
