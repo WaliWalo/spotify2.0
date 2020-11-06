@@ -66,6 +66,7 @@ window.onload = function () {
   const urlParams = new URLSearchParams(queryString);
   const artist = urlParams.get("artist");
   example(artist);
+  example2();
 };
 
 let example = (query) => {
@@ -84,8 +85,10 @@ let example = (query) => {
     .then((body) => {
       console.log(body);
 
-      let container = document.querySelector(".main-artist");
+      let container = document.querySelector("#workplease");
       let div = document.createElement("div");
+      div.classList.add("main-artist");
+      container.setAttribute("style", ` margin-left: 0;`);
       // let myMain = document.querySelector("#shade")  ${body.picture_medium} ${body.name}
 
       div.innerHTML = ` 
@@ -116,5 +119,52 @@ let example = (query) => {
 
     .catch((err) => {
       console.error(err);
+    });
+};
+// "https://api.deezer.com/artist/13/top?limit=50",
+
+let example2 = () => {
+  const anotherfetch = fetch(
+    "https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "c608fc777fmshd55587c64c83d78p1ebebcjsn20918a48db47",
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((body) => {
+      console.log(body);
+      let myalbums = document.querySelector("#justwork");
+
+      console.log(body.data.length);
+      let htmlString = "";
+      for (let i = 0; i < body.data.length; i++) {
+        htmlString =
+          htmlString +
+          `
+  <div class="col col-12 col-md-4 col-lg-2 text-center">
+  <div class="first-image">
+    <a href="#">
+      <img
+        class="img-fluid gradient"
+        src="${body.data[i].album.cover_small}"
+        style="width: 9rem; height: 9rem"
+        alt=""
+    /></a>
+    <div class="shadebg1"></div>
+    <p style="color: white; padding-bottom: 0; margin-bottom: 0">
+     ${body.data[i].album.title}
+    </p>
+    <p style="margin-bottom: 0; color: lightgray"> ${body.data[i].artist.name}</p>
+    <div class="library-play-button">
+      <i class="fas fa-play"></i>
+    </div>
+  </div>
+</div>`;
+      }
+      myalbums.innerHTML = htmlString;
     });
 };
