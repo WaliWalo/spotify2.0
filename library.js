@@ -85,7 +85,7 @@ async function searchBtn() {
             <img src="${element.album.cover_medium}" alt="" width="100%" />
             </div>
             <a href="album.html"><h4>${element.album.title}</h4></a>
-            <a href="artist.html?artist=${element.artist.id}"><p>${element.artist.name}</p></a>
+            <a href="artist.html?artist=${element.artist.id}&name=${element.artist.name}"><p>${element.artist.name}</p></a>
             <div class="library-play-button">
             <i class="fas fa-play"></i>
             </div>

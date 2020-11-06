@@ -65,8 +65,10 @@ window.onload = function () {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const artist = urlParams.get("artist");
+  const name = urlParams.get("name");
+  name.replace(/%20/g, " ");
   example(artist);
-  example2();
+  example2(name);
 };
 
 let example = (query) => {
@@ -100,7 +102,7 @@ let example = (query) => {
       <div class="centered">
         <div>
           <p>33,000,575 MONTHLY LISTENERS</p>
-          <h1><b>${body.name}</b></h1>
+          <h1 id="artistName"><b>${body.name}</b></h1>
           <input class="btn btn-success" type="button" value="Play" />
           <input class="btn btn-primary-outline" type="button" value="Follow" />
           <div class="mt-5">
@@ -113,6 +115,7 @@ let example = (query) => {
         
         
           `;
+      artistName = body.name;
       container.insertBefore(div, container.firstElementChild);
       //container.appendChild(myMain);
     })
@@ -123,9 +126,9 @@ let example = (query) => {
 };
 // "https://api.deezer.com/artist/13/top?limit=50",
 
-let example2 = () => {
+let example2 = (query) => {
   const anotherfetch = fetch(
-    "https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem",
+    `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
     {
       method: "GET",
       headers: {
@@ -139,7 +142,6 @@ let example2 = () => {
       console.log(body);
       let myalbums = document.querySelector("#justwork");
 
-      console.log(body.data.length);
       let htmlString = "";
       for (let i = 0; i < body.data.length; i++) {
         htmlString =
