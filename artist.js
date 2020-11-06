@@ -62,16 +62,15 @@ function myFunction() {
 }
 
 window.onload = function () {
-  example();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const artist = urlParams.get("artist");
-  console.log(artist);
+  example(artist);
 };
 
-let example = () => {
+let example = (query) => {
   const striveapi = fetch(
-    "https://deezerdevs-deezer.p.rapidapi.com/artist/13",
+    `https://deezerdevs-deezer.p.rapidapi.com/artist/${query}`,
     {
       method: "GET",
       headers: {
